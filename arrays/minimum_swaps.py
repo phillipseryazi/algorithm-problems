@@ -9,7 +9,6 @@ def minimumSwaps(arr):
         while arr[i] != i + 1:
             arr[arr[i] - 1], arr[i] = arr[i], arr[arr[i] - 1]
             swaps += 1
-            print(i)
 
     return swaps
 
