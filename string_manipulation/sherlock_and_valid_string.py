@@ -1,24 +1,41 @@
 def isValid(s):
+    if len(s) == 1:
+        return "YES"
+
     memo = {}
 
     for i in s:
         memo[i] = 0
 
     for i in range(len(s)):
-        memo[s[i]] = s.count(s[i])
+        memo[s[i]] += 1
 
-    count = 0
-    for k, v in memo.items():
-        if (v - min(memo.values())) > 0:
-            count += 1
+    valueList = list(memo.values())
 
-    if count > 0:
-        return "NO"
+    valueList.sort()
 
-    return "YES"
+    first = valueList[0]
+    second = valueList[1]
+    last = valueList[len(valueList) - 1]
+    secondLast = valueList[len(valueList) - 2]
+
+    # if first and last are the same
+    if first == last:
+        return "YES"
+
+    # if first is 1 and second and last are the same
+    if first == 1 and second == last:
+        return "YES"
+
+    # if all are the same and last just one extra
+    if first == secondLast and secondLast == last - 1:
+        return "YES"
+
+    return "NO"
 
 
 if __name__ == "__main__":
+    print(isValid("a"))
     print(isValid("aabbcd"))  # no
     print(isValid("aabbccddeefghi"))  # no
     print(isValid("abcdefghhgfedecba"))  # yes
